@@ -68,6 +68,12 @@ then
 fi
 GSVERBOSECFLAG=
 
+if test x"$XML_OUTPUT_DIR"
+then
+  echo "TODO: switch to XML output"
+  echo "DO NOT SUBMIT"
+fi
+
 # Argument checking
 while test $# != 0
 do
