@@ -41,3 +41,5 @@ Documentation/README
 Documentation/RELEASENOTES
 Documentation/version.texi
 Documentation/**/*.html
+/bazel-*
+/MODULE.bazel.lock

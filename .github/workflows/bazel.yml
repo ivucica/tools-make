@@ -1,0 +1,29 @@
+name: Bazel CI
+
+on:
+  push:
+    branches: [ master, main, bazel-build ]
+  pull_request:
+    branches: [ master, main, bazel-build ]
+  workflow_dispatch:
+
+jobs:
+  bazel:
+    name: Ubuntu x64 Clang Bazel
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.workflow }}
+          repository-cache: true
+          bazelrc: |
+            common --repo_env=CC=clang
+            common --repo_env=CXX=clang++
+      - name: Build
+        run: bazel build //...
